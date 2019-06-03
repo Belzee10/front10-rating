@@ -1,24 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Item = ({ icon, content }) => {
-  return icon ? <i className={icon} /> : <span>{content}</span>;
+const Item = ({ icon }) => {
+  return <i className={icon} />;
 };
 
 Item.propTypes = {
   /**
    * Icon to render
    */
-  icon: PropTypes.string,
-  /**
-   * Content to render (usually a unicode)
-   */
-  content: PropTypes.any
+  icon: PropTypes.string
 };
 
 Item.defaultProps = {
-  icon: "", //TODO: default icon
-  content: "★"
+  icon: "icon-star-empty"
 };
 
 export default Item;
