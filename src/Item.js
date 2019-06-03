@@ -11,9 +11,9 @@ Item.propTypes = {
    */
   icon: PropTypes.string,
   /**
-   * Content to render
+   * Content to render (usually a unicode)
    */
-  content: PropTypes.content
+  content: PropTypes.any
 };
 
 Item.defaultProps = {
