@@ -1,19 +1,19 @@
-import React from "react";
-import PropTypes from "prop-types";
-import "../assets/style.css";
+import React from 'react';
+import PropTypes from 'prop-types';
+import '../assets/style.css';
 
-import Item from "./Item";
+import Item from './Item';
 
 const renderItemType = (index, value, renderFullItem, renderEmptyItem) => {
-  let icon = "";
+  let icon = '';
   if (index <= value) {
-    if (renderFullItem && typeof renderFullItem === "function")
+    if (renderFullItem && typeof renderFullItem === 'function')
       return renderFullItem(index);
-    icon += "icon-star-full";
+    icon += 'icon-star-full';
   } else {
-    if (renderEmptyItem && typeof renderEmptyItem === "function")
+    if (renderEmptyItem && typeof renderEmptyItem === 'function')
       return renderEmptyItem(index);
-    icon += "icon-star-empty";
+    icon += 'icon-star-empty';
   }
   return <Item key={index} icon={icon} />;
 };
@@ -23,13 +23,13 @@ const renderItems = ({
   value,
   renderItem,
   renderFullItem,
-  renderEmptyItem,
-  ...props
+  renderEmptyItem
+  // ...props
 }) => {
   let items = [];
   for (let index = 0; index < starsLength; index += 1) {
     const itemToRender =
-      renderItem && typeof renderItem === "function"
+      renderItem && typeof renderItem === 'function'
         ? renderItem(index)
         : renderItemType(index + 1, value, renderFullItem, renderEmptyItem);
 
