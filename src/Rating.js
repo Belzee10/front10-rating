@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "../assets/style.css";
 
 import Item from "./Item";
 
@@ -12,6 +13,7 @@ const renderItemType = (index, value, renderFullItem, renderEmptyItem) => {
   } else {
     if (renderEmptyItem && typeof renderEmptyItem === "function")
       return renderEmptyItem(index);
+    icon += "icon-star-empty";
   }
   return <Item key={index} icon={icon} />;
 };
