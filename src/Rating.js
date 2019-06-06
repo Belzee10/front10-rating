@@ -4,16 +4,28 @@ import '../assets/style.css';
 
 import Item from './Item';
 
-const renderItemType = (index, value, renderFullItem, renderEmptyItem) => {
+const renderItemType = (
+  index,
+  value,
+  renderFullItem,
+  renderEmptyItem,
+  renderHalfItem
+) => {
   let icon = '';
   if (index <= value) {
-    if (renderFullItem && typeof renderFullItem === 'function')
-      return renderFullItem(index);
-    icon += 'icon-star-full';
+    if (index === Math.round(value) && Math.round(value) !== value) {
+      if (renderHalfItem && typeof renderHalfItem === 'function')
+        return renderHalfItem(index);
+      icon += 'icon-star-half';
+    } else {
+      if (renderFullItem && typeof renderFullItem === 'function')
+        return renderFullItem(index);
+      icon = 'icon-star-full';
+    }
   } else {
     if (renderEmptyItem && typeof renderEmptyItem === 'function')
       return renderEmptyItem(index);
-    icon += 'icon-star-empty';
+    icon = 'icon-star-empty';
   }
   return <Item key={index} icon={icon} />;
 };
@@ -23,15 +35,21 @@ const renderItems = ({
   value,
   renderItem,
   renderFullItem,
-  renderEmptyItem
-  // ...props
+  renderEmptyItem,
+  renderHalfItem
 }) => {
   let items = [];
   for (let index = 0; index < starsLength; index += 1) {
     const itemToRender =
       renderItem && typeof renderItem === 'function'
         ? renderItem(index)
-        : renderItemType(index + 1, value, renderFullItem, renderEmptyItem);
+        : renderItemType(
+            index + 1,
+            value,
+            renderFullItem,
+            renderEmptyItem,
+            renderHalfItem
+          );
 
     items = [...items, itemToRender];
   }
@@ -62,7 +80,11 @@ Rating.propTypes = {
   /**
    * Function to render the unmarked Items
    */
-  renderEmptyItem: PropTypes.func
+  renderEmptyItem: PropTypes.func,
+  /**
+   * Function to render the half items
+   */
+  renderHalfItem: PropTypes.func
 };
 
 Rating.defaultProps = {
@@ -70,7 +92,8 @@ Rating.defaultProps = {
   value: 0,
   renderItem: null,
   renderFullItem: null,
-  renderEmptyItem: null
+  renderEmptyItem: null,
+  renderHalfItem: null
 };
 
 export default Rating;

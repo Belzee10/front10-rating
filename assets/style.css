@@ -38,3 +38,7 @@
 .icon-star-full:before {
   content: '\e9d9';
 }
+
+.item {
+  color: #d3d333;
+}
