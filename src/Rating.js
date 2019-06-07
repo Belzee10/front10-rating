@@ -84,7 +84,7 @@ Rating.propTypes = {
    */
   renderEmptyItem: PropTypes.func,
   /**
-   * Function to render the marked half items
+   * Function to render the half items
    */
   renderHalfItem: PropTypes.func,
   /**
