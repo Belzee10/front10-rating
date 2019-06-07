@@ -53,7 +53,6 @@ const Rating = ({
             renderEmptyItem,
             renderHalfItem
           );
-
     items = [...items, itemToRender];
   }
   return (
