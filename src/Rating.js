@@ -4,6 +4,8 @@ import '../assets/style.css';
 
 import Item from './Item';
 
+// 2.5 of 5
+
 const renderItemType = (
   index,
   value,
@@ -12,8 +14,9 @@ const renderItemType = (
   renderHalfItem
 ) => {
   let icon = '';
-  if (index <= value) {
-    if (index === Math.round(value) && Math.round(value) !== value) {
+  const roundedValue = Math.ceil(value);
+  if (index <= roundedValue) {
+    if (index === roundedValue && value !== roundedValue) {
       if (renderHalfItem && typeof renderHalfItem === 'function')
         return renderHalfItem(index);
       icon += 'icon-star-half';
@@ -30,7 +33,7 @@ const renderItemType = (
   return <Item key={index} icon={icon} />;
 };
 
-const renderItems = ({
+const Rating = ({
   starsLength,
   value,
   renderItem,
@@ -54,10 +57,6 @@ const renderItems = ({
     items = [...items, itemToRender];
   }
   return items;
-};
-
-const Rating = props => {
-  return renderItems(props);
 };
 
 Rating.propTypes = {
