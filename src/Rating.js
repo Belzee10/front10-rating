@@ -4,8 +4,6 @@ import '../assets/style.css';
 
 import Item from './Item';
 
-// 2.5 of 5
-
 const renderItemType = (
   index,
   value,
@@ -39,7 +37,9 @@ const Rating = ({
   renderItem,
   renderFullItem,
   renderEmptyItem,
-  renderHalfItem
+  renderHalfItem,
+  className,
+  style
 }) => {
   let items = [];
   for (let index = 0; index < starsLength; index += 1) {
@@ -56,7 +56,11 @@ const Rating = ({
 
     items = [...items, itemToRender];
   }
-  return items;
+  return (
+    <div className={`fr-rating-container ${className}`} style={style}>
+      {items}
+    </div>
+  );
 };
 
 Rating.propTypes = {
@@ -81,9 +85,17 @@ Rating.propTypes = {
    */
   renderEmptyItem: PropTypes.func,
   /**
-   * Function to render the half items
+   * Function to render the marked half items
    */
-  renderHalfItem: PropTypes.func
+  renderHalfItem: PropTypes.func,
+  /**
+   * className applied to the component
+   */
+  className: PropTypes.string,
+  /**
+   * inline styles applied to the component
+   */
+  style: PropTypes.objectOf(PropTypes.any)
 };
 
 Rating.defaultProps = {
@@ -92,7 +104,9 @@ Rating.defaultProps = {
   renderItem: null,
   renderFullItem: null,
   renderEmptyItem: null,
-  renderHalfItem: null
+  renderHalfItem: null,
+  className: '',
+  style: null
 };
 
 export default Rating;

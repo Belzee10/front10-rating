@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Item = ({ icon }) => {
-  return <i className={`item ${icon}`} />;
+  return <i className={`fr-rating-item ${icon}`} />;
 };
 
 Item.propTypes = {
