@@ -1,4 +1,4 @@
-**front10-rating** is a simple and tiny rating component that you can customize via [renderProps](https://facebook.github.io/render-props.html).
+**front10-rating** is a simple and tiny rating component that you can customize via [renderProps](https://reactjs.org/docs/render-props.html).
 
 ### Installation
 
