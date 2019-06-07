@@ -8,7 +8,7 @@
 
 #### Basic
 
-```
+```jsx
 import React from "react";
 import Rating from "front10-rating";
 
@@ -23,7 +23,7 @@ const App = () => {
 
 #### Custom render
 
-```
+```jsx
 import React from "react";
 import Rating from "front10-rating";
 
@@ -41,7 +41,7 @@ const App = () => {
 
 #### With some styles
 
-```
+```jsx
 import React from "react";
 import Rating from "front10-rating";
 
