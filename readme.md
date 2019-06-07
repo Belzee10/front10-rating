@@ -2,7 +2,7 @@
 
 ### Installation
 
-//TODO
+`npm install --save front10-rating`
 
 ### Examples
 
@@ -19,7 +19,7 @@ const App = () => {
 }
 ```
 
-//TODO: image
+![Basic example](https://res.cloudinary.com/dombtm0fe/image/upload/v1559924999/Screenshot_from_2019-06-07_12-27-16.png)
 
 #### Custom render
 
@@ -37,7 +37,7 @@ const App = () => {
 }
 ```
 
-//TODO: image
+![Custom render](https://res.cloudinary.com/dombtm0fe/image/upload/v1559925291/Screenshot_from_2019-06-07_12-31-05.png)
 
 #### With some styles
 
@@ -52,7 +52,7 @@ const App = () => {
 }
 ```
 
-//TODO: image
+![With some styles](https://res.cloudinary.com/dombtm0fe/image/upload/v1559925306/Screenshot_from_2019-06-07_12-32-52.png)
 
 ### List of props
 
