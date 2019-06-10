@@ -18,17 +18,14 @@ const renderItemType = (
   const roundedValue = Math.ceil(value);
   if (index <= roundedValue) {
     if (index === roundedValue && value !== roundedValue) {
-      if (renderHalfItem && typeof renderHalfItem === 'function')
-        return renderHalfItem(index);
+      if (renderHalfItem && typeof renderHalfItem === 'function') return renderHalfItem(index);
       icon += 'icon-star-half';
     } else {
-      if (renderFullItem && typeof renderFullItem === 'function')
-        return renderFullItem(index);
+      if (renderFullItem && typeof renderFullItem === 'function') return renderFullItem(index);
       icon = 'icon-star-full';
     }
   } else {
-    if (renderEmptyItem && typeof renderEmptyItem === 'function')
-      return renderEmptyItem(index);
+    if (renderEmptyItem && typeof renderEmptyItem === 'function') return renderEmptyItem(index);
     icon = 'icon-star-empty';
   }
   return (
