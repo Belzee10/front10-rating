@@ -1,0 +1,4 @@
+diff a/src/Item.jsx b/src/Item.jsx	(rejected hunks)
+@@ -11 +11 @@ const Item = ({ icon, onClick, onKeyPress, allowRate }) => {
+-			tabIndex="0"
++      tabIndex="0"

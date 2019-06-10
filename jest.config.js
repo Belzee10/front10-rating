@@ -4,9 +4,11 @@ module.exports = {
   collectCoverageFrom: ['<rootDir>/src/*.jsx'],
   moduleDirectories: ['node_modules'],
   testPathIgnorePatterns: ['<rootDir>/build/', '<rootDir>/node_modules/'],
+  transformIgnorePatterns: ['<rootDir>/node_modules/'],
   roots: ['<rootDir>/src/'],
   transform: {
-    '^.+\\.(js|jsx)$': 'babel-jest'
+    '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
+    '^.+\\.(js|jsx)?$': 'babel-jest'
   },
   coverageThreshold: {
     global: {
@@ -16,7 +18,6 @@ module.exports = {
       statements: 50
     }
   },
-  moduleNameMapper: {},
   coverageReporters: ['json-summary', 'json', 'text', 'text-summary', 'lcov'],
   testURL: 'http://localhost/',
   reporters: ['default']

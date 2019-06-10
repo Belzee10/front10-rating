@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Basic 1`] = `
+<div
+  class="fr-rating-container "
+>
+  <i
+    class="fr-rating-item icon-star-full"
+  />
+  <i
+    class="fr-rating-item icon-star-full"
+  />
+  <i
+    class="fr-rating-item icon-star-full"
+  />
+  <i
+    class="fr-rating-item icon-star-empty"
+  />
+  <i
+    class="fr-rating-item icon-star-empty"
+  />
+</div>
+`;
+
+exports[`Testing Basic 2`] = `
+<DocumentFragment>
+  <div
+    class="fr-rating-container "
+  >
+    <i
+      class="fr-rating-item icon-star-full"
+    />
+    <i
+      class="fr-rating-item icon-star-full"
+    />
+    <i
+      class="fr-rating-item icon-star-full"
+    />
+    <i
+      class="fr-rating-item icon-star-empty"
+    />
+    <i
+      class="fr-rating-item icon-star-empty"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Testing functionalities 1`] = `
+<div
+  class="fr-rating-container "
+>
+  <i
+    class="fr-rating-item icon-star-full"
+    role="button"
+    tabindex="0"
+  />
+  <i
+    class="fr-rating-item icon-star-full"
+    role="button"
+    tabindex="0"
+  />
+  <i
+    class="fr-rating-item icon-star-full"
+    role="button"
+    tabindex="0"
+  />
+  <i
+    class="fr-rating-item icon-star-empty"
+    role="button"
+    tabindex="0"
+  />
+  <i
+    class="fr-rating-item icon-star-empty"
+    role="button"
+    tabindex="0"
+  />
+</div>
+`;
+
+exports[`Testing functionalities 2`] = `
+<DocumentFragment>
+  <div
+    class="fr-rating-container "
+  >
+    <i
+      class="fr-rating-item icon-star-full"
+      role="button"
+      tabindex="0"
+    />
+    <i
+      class="fr-rating-item icon-star-full"
+      role="button"
+      tabindex="0"
+    />
+    <i
+      class="fr-rating-item icon-star-full"
+      role="button"
+      tabindex="0"
+    />
+    <i
+      class="fr-rating-item icon-star-empty"
+      role="button"
+      tabindex="0"
+    />
+    <i
+      class="fr-rating-item icon-star-empty"
+      role="button"
+      tabindex="0"
+    />
+  </div>
+</DocumentFragment>
+`;

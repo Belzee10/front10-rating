@@ -131,8 +131,8 @@ Rating.defaultProps = {
   renderFullItem: null,
   renderEmptyItem: null,
   renderHalfItem: null,
-  onKeyPress: null,
-  onClick: null,
+  onKeyPress: () => {},
+  onClick: () => {},
   className: '',
   style: null
 };

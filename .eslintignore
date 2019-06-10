@@ -1,0 +1,15 @@
+/src/**/*.snap
+/src/**/*.scss
+/src/**/*.css
+/src/**/*.md
+/src/**/*.test.*
+/src/**/*.png
+/src/**/*.json
+/src/**/*.ico
+/src/**/*.svg
+*.eot
+*.woff
+*.md
+*.ttf
+/node_modules
+/coverage

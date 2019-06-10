@@ -15,6 +15,7 @@
   "scripts": {
     "test": "jest --coverage --silent --config ./jest.config.js",
     "start": "webpack --watch",
+    "eslint": "eslint ./src/*.jsx --fix",
     "build": "webpack"
   },
   "author": {
@@ -25,6 +26,7 @@
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.4.4",
     "@babel/plugin-transform-react-jsx": "^7.3.0",
+    "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "@testing-library/react": "^8.0.1",
@@ -38,6 +40,7 @@
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-jasmine": "^2.10.1",
+    "eslint-plugin-jest": "^22.6.4",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.13.0",
@@ -45,6 +48,7 @@
     "husky": "^2.3.0",
     "jest": "^24.8.0",
     "jest-dom": "^3.5.0",
+    "jest-transform-stub": "^2.0.0",
     "lint-staged": "^8.1.7",
     "prettier": "^1.17.1",
     "pretty-quick": "^1.11.0",
@@ -53,8 +57,7 @@
   },
   "lint-staged": {
     "*.{js,jsx}": [
-      "pretty-quick --staged",
-      "eslint ./src/** --fix",
+      "eslint ./src/*.jsx --fix",
       "git add"
     ]
   },
