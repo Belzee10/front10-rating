@@ -5,11 +5,14 @@ import '../assets/style.css';
 import Item from './Item';
 
 const renderItemType = (
+  allowRate,
   index,
   value,
   renderFullItem,
   renderEmptyItem,
-  renderHalfItem
+  renderHalfItem,
+  onKeyPress,
+  onClick
 ) => {
   let icon = '';
   const roundedValue = Math.ceil(value);
@@ -28,16 +31,27 @@ const renderItemType = (
       return renderEmptyItem(index);
     icon = 'icon-star-empty';
   }
-  return <Item key={index} icon={icon} />;
+  return (
+    <Item
+      key={index}
+      icon={icon}
+      allowRate={allowRate}
+      onClick={onClick(index)}
+      onKeyPress={onKeyPress(index)}
+    />
+  );
 };
 
 const Rating = ({
+  allowRate,
   starsLength,
   value,
   renderItem,
   renderFullItem,
   renderEmptyItem,
   renderHalfItem,
+  onKeyPress,
+  onClick,
   className,
   style
 }) => {
@@ -47,11 +61,14 @@ const Rating = ({
       renderItem && typeof renderItem === 'function'
         ? renderItem(index)
         : renderItemType(
+            allowRate,
             index + 1,
             value,
             renderFullItem,
             renderEmptyItem,
-            renderHalfItem
+            renderHalfItem,
+            onKeyPress,
+            onClick
           );
     items = [...items, itemToRender];
   }
@@ -63,6 +80,10 @@ const Rating = ({
 };
 
 Rating.propTypes = {
+  /**
+   * Allow to rate
+   */
+  allowRate: PropTypes.bool,
   /**
    * Total of items to show
    */
@@ -88,6 +109,14 @@ Rating.propTypes = {
    */
   renderHalfItem: PropTypes.func,
   /**
+   * Function to handle rate on click
+   */
+  onKeyPress: PropTypes.func,
+  /**
+   * Function to handle rate on key press
+   */
+  onClick: PropTypes.func,
+  /**
    * className applied to the component
    */
   className: PropTypes.string,
@@ -98,12 +127,15 @@ Rating.propTypes = {
 };
 
 Rating.defaultProps = {
+  allowRate: false,
   starsLength: 5,
   value: 0,
   renderItem: null,
   renderFullItem: null,
   renderEmptyItem: null,
   renderHalfItem: null,
+  onKeyPress: null,
+  onClick: null,
   className: '',
   style: null
 };
