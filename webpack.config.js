@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   mode: 'development', // "production" | "development" | "none"
-  entry: './src/Rating.js',
+  entry: './src/Rating.jsx',
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'index.js',
@@ -11,7 +11,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx$/,
         include: path.resolve(__dirname, 'src'),
         exclude: /(node_modules|bower_components|build)/,
         use: {
