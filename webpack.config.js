@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'development', // "production" | "development" | "none"
+  mode: 'production', // "production" | "development" | "none"
   entry: './src/Rating.jsx',
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -11,31 +11,23 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx$/,
-        include: path.resolve(__dirname, 'src'),
-        exclude: /(node_modules|bower_components|build)/,
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        resolve: { extensions: ['.js', '.jsx'] },
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env']
+            presets: ['@babel/preset-env', '@babel/preset-react']
           }
         }
       },
       {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader']
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {}
-          }
-        ]
       }
     ]
   },
+
   externals: {
     react: 'commonjs react'
   }
