@@ -42,3 +42,7 @@
 .fr-rating-container {
   color: #d3d333;
 }
+
+.fr-cursor-pointer {
+  cursor: pointer;
+}
