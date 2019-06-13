@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const Item = ({ icon, onClick, onKeyPress, allowRate }) => {
   return allowRate ? (
     <i
-      className={`fr-rating-item ${icon}`}
+      className={`fr-rating-item ${icon} fr-cursor-pointer`}
       onClick={onClick}
       onKeyPress={onKeyPress}
       role="button"

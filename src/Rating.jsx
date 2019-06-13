@@ -33,8 +33,8 @@ const renderItemType = (
       key={index}
       icon={icon}
       allowRate={allowRate}
-      onClick={onClick(index)}
-      onKeyPress={onKeyPress(index)}
+      onClick={() => onClick(index)}
+      onKeyPress={() => onKeyPress(index)}
     />
   );
 };
@@ -131,8 +131,8 @@ Rating.defaultProps = {
   renderFullItem: null,
   renderEmptyItem: null,
   renderHalfItem: null,
-  onKeyPress: null,
-  onClick: null,
+  onKeyPress: () => {},
+  onClick: () => {},
   className: '',
   style: null
 };
