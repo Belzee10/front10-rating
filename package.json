@@ -16,12 +16,11 @@
     "react": "^16.8.4"
   },
   "dependencies": {
-    "prop-types": "^15.7.2",
-    "react": "^16.8.4"
+    "prop-types": "^15.7.2"
   },
   "scripts": {
-    "start": "webpack --watch --env development",
-    "build": "webpack --env production",
+    "start": "webpack --watch --env development --mode development",
+    "build": "webpack --env production --mode production",
     "lint": "eslint ./src/** --fix"
   },
   "devDependencies": {

@@ -4,15 +4,16 @@ import PropTypes from 'prop-types';
 const Item = ({ icon, onClick, onKeyPress, allowRate }) => {
   return allowRate ? (
     <i
-      className={`fr-rating-item ${icon} fr-cursor-pointer`}
+      className={`${icon}`}
       onClick={onClick}
       onKeyPress={onKeyPress}
       role="button"
       tabIndex="0"
     />
   ) : (
-    <i className={`fr-rating-item ${icon}`} />
+    <i className={`${icon}`} />
   );
+  // return <img src={icon} />;
 };
 
 Item.propTypes = {
@@ -35,7 +36,7 @@ Item.propTypes = {
 };
 
 Item.defaultProps = {
-  icon: 'icon-star-empty',
+  icon: '',
   allowRate: false,
   onClick: () => {},
   onKeyPress: () => {}

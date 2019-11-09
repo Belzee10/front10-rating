@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../assets/style.css';
 
 import Item from './Item';
+// import star from './assets/star.svg';
 
 const renderItemType = (
   allowRate,
@@ -24,7 +24,7 @@ const renderItemType = (
     } else {
       if (renderFullItem && typeof renderFullItem === 'function')
         return renderFullItem(index);
-      icon = 'icon-star-full';
+      icon = '';
     }
   } else {
     if (renderEmptyItem && typeof renderEmptyItem === 'function')
@@ -73,7 +73,7 @@ const Rating = ({
     items = [...items, itemToRender];
   }
   return (
-    <div className={`fr-rating-container ${className}`} style={style}>
+    <div className={`${className}`} style={style}>
       {items}
     </div>
   );
