@@ -21,7 +21,8 @@
   "scripts": {
     "start": "webpack --watch --env development --mode development",
     "build": "webpack --env production --mode production",
-    "lint": "eslint ./src/** --fix"
+    "lint": "eslint ./src/** --ext jsx --fix",
+    "analize": "webpack --profile --json > stats.json"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
@@ -44,8 +45,10 @@
     "husky": "^2.3.0",
     "lint-staged": "^8.1.7",
     "prettier": "^1.17.1",
+    "react-svg-loader": "^3.0.3",
     "style-loader": "^0.23.1",
     "webpack": "^4.34.0",
+    "webpack-bundle-analyzer": "^3.6.0",
     "webpack-cli": "^3.3.2"
   }
 }

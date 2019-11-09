@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Item from './Item';
-// import star from './assets/star.svg';
 
 const renderItemType = (
   allowRate,
@@ -24,7 +23,7 @@ const renderItemType = (
     } else {
       if (renderFullItem && typeof renderFullItem === 'function')
         return renderFullItem(index);
-      icon = '';
+      icon = 'star';
     }
   } else {
     if (renderEmptyItem && typeof renderEmptyItem === 'function')

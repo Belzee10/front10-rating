@@ -1,4 +1,5 @@
 const path = require('path');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
   entry: './src/Rating.jsx',
@@ -22,10 +23,21 @@ module.exports = {
       },
       {
         test: /\.svg$/,
-        use: 'file-loader'
+        use: [
+          {
+            loader: 'babel-loader'
+          },
+          {
+            loader: 'react-svg-loader',
+            options: {
+              jsx: true
+            }
+          }
+        ]
       }
     ]
   },
+  plugins: [new BundleAnalyzerPlugin({ openAnalyzer: false })],
   externals: {
     react: 'commonjs react'
   }
