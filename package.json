@@ -3,9 +3,14 @@
   "version": "1.0.4",
   "description": "React rating component",
   "main": "build/index.js",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/Belzee10/front10-rating.git"
+  },
+  "author": {
+    "name": "Ivan Perez",
+    "email": "belzee92@gmail.com"
   },
   "peerDependencies": {
     "react": "^16.8.4"
@@ -15,13 +20,9 @@
     "react": "^16.8.4"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack --watch",
-    "build": "webpack"
-  },
-  "author": {
-    "name": "Ivan Perez",
-    "email": "belzee92@gmail.com"
+    "start": "webpack --watch --env development",
+    "build": "webpack --env production",
+    "lint": "eslint ./src/** --fix"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
@@ -44,21 +45,8 @@
     "husky": "^2.3.0",
     "lint-staged": "^8.1.7",
     "prettier": "^1.17.1",
-    "pretty-quick": "^1.11.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.34.0",
     "webpack-cli": "^3.3.2"
-  },
-  "lint-staged": {
-    "*.{js,jsx}": [
-      "pretty-quick --staged",
-      "eslint ./src/** --fix",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "NODE_ENV=production lint-staged"
-    }
   }
 }

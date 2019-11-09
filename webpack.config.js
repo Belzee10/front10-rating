@@ -1,7 +1,6 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'production', // "production" | "development" | "none"
   entry: './src/Rating.jsx',
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -27,7 +26,6 @@ module.exports = {
       }
     ]
   },
-
   externals: {
     react: 'commonjs react'
   }
