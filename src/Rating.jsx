@@ -3,86 +3,70 @@ import PropTypes from 'prop-types';
 
 import Item from './Item';
 
-const renderItemType = (
-  allowRate,
+const renderFunc = (fn, args) => {
+  return fn && typeof fn === 'function' ? fn(args) : null;
+};
+
+const renderItemType = ({
   index,
   value,
+  width,
+  height,
+  color,
+  emptyColor,
   renderFullItem,
   renderEmptyItem,
   renderHalfItem,
-  onKeyPress,
   onClick
-) => {
-  let icon = '';
-  const roundedValue = Math.ceil(value);
-  if (index <= roundedValue) {
-    if (index === roundedValue && value !== roundedValue) {
-      if (renderHalfItem && typeof renderHalfItem === 'function')
-        return renderHalfItem(index);
-      icon += 'icon-star-half';
-    } else {
-      if (renderFullItem && typeof renderFullItem === 'function')
-        return renderFullItem(index);
-      icon = 'star';
-    }
-  } else {
-    if (renderEmptyItem && typeof renderEmptyItem === 'function')
-      return renderEmptyItem(index);
-    icon = 'icon-star-empty';
+}) => {
+  const valueFloor = Math.floor(value);
+  const valueCeil = Math.ceil(value);
+  const isInteger = valueFloor === value;
+  let colorValue = '';
+  let colorEmpty = '';
+
+  if (index <= valueFloor) {
+    colorValue = color;
+    colorEmpty = color;
+    return renderFunc(renderFullItem, { index });
   }
+  if (index > valueFloor) {
+    colorValue = emptyColor;
+    colorEmpty = emptyColor;
+    if (index === valueCeil && !isInteger) {
+      colorValue = color;
+      return renderFunc(renderHalfItem, { index });
+    }
+    return renderFunc(renderEmptyItem, { index });
+  }
+
   return (
     <Item
       key={index}
-      icon={icon}
-      allowRate={allowRate}
+      color={colorValue}
+      emptyColor={colorEmpty}
+      width={width}
+      height={height}
       onClick={() => onClick(index)}
-      onKeyPress={() => onKeyPress(index)}
     />
   );
 };
 
-const Rating = ({
-  allowRate,
-  starsLength,
-  value,
-  renderItem,
-  renderFullItem,
-  renderEmptyItem,
-  renderHalfItem,
-  onKeyPress,
-  onClick,
-  className,
-  style
-}) => {
-  let items = [];
-  for (let index = 0; index < starsLength; index += 1) {
-    const itemToRender =
-      renderItem && typeof renderItem === 'function'
-        ? renderItem(index)
-        : renderItemType(
-            allowRate,
-            index + 1,
-            value,
-            renderFullItem,
-            renderEmptyItem,
-            renderHalfItem,
-            onKeyPress,
-            onClick
-          );
-    items = [...items, itemToRender];
-  }
+const Rating = props => {
+  const { starsLength, renderItem, className, style } = props;
+  const array = new Array(starsLength).fill();
   return (
-    <div className={`${className}`} style={style}>
-      {items}
+    <div className={className} style={style}>
+      {array.map((_, index) =>
+        renderItem && typeof renderItem === 'function'
+          ? renderItem(index)
+          : renderItemType({ ...props, index: index + 1 })
+      )}
     </div>
   );
 };
 
 Rating.propTypes = {
-  /**
-   * Allow to rate
-   */
-  allowRate: PropTypes.bool,
   /**
    * Total of items to show
    */
@@ -91,6 +75,22 @@ Rating.propTypes = {
    * Rating value
    */
   value: PropTypes.number,
+  /**
+   * width of the icon
+   */
+  width: PropTypes.string,
+  /**
+   * height of the icon
+   */
+  height: PropTypes.string,
+  /**
+   * color of the icon
+   */
+  color: PropTypes.string,
+  /**
+   * color of the empty icon
+   */
+  emptyColor: PropTypes.string,
   /**
    * Function to render the Items
    */
@@ -108,10 +108,6 @@ Rating.propTypes = {
    */
   renderHalfItem: PropTypes.func,
   /**
-   * Function to handle rate on click
-   */
-  onKeyPress: PropTypes.func,
-  /**
    * Function to handle rate on key press
    */
   onClick: PropTypes.func,
@@ -126,14 +122,16 @@ Rating.propTypes = {
 };
 
 Rating.defaultProps = {
-  allowRate: false,
   starsLength: 5,
   value: 0,
+  width: '16',
+  height: '16',
+  color: '#ffc107',
+  emptyColor: '#eceff1',
   renderItem: null,
   renderFullItem: null,
   renderEmptyItem: null,
   renderHalfItem: null,
-  onKeyPress: () => {},
   onClick: () => {},
   className: '',
   style: null

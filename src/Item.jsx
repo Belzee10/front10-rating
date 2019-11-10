@@ -1,51 +1,50 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Star from '../assets/star.svg';
-
-const Item = ({ icon, onClick, onKeyPress, allowRate }) => {
-  const iconMapper = {
-    star: Star
-  };
-  // return allowRate ? (
-  //   <i
-  //     className={`${icon}`}
-  //     onClick={onClick}
-  //     onKeyPress={onKeyPress}
-  //     role="button"
-  //     tabIndex="0"
-  //   />
-  // ) : (
-  //   <i className={`${icon}`} />
-  // );
-  const Icon = iconMapper[icon];
-  return <Icon height="50" width="50" color="red" fill="red" />;
+const Item = ({ onClick, width, height, color, emptyColor }) => {
+  return (
+    <svg viewBox="0 0 24 24" width={width} height={height} onClick={onClick}>
+      <path
+        d="m23.79 9.87-5.36 5.49 1.26 7.77c.111.62-.562 1.074-1.1.78l-6.59-3.65v-20.23c.28 0 .56.13.68.4l3.31 7.05 7.37 1.12c.616.11.843.835.43 1.27z"
+        fill={emptyColor}
+      />
+      <path
+        d="m12 .03v20.23l-6.59 3.65c-.529.297-1.212-.153-1.1-.78l1.26-7.77-5.36-5.49c-.413-.435-.187-1.16.43-1.27l7.37-1.12 3.31-7.05c.12-.27.4-.4.68-.4z"
+        fill={color}
+      />
+    </svg>
+  );
 };
 
 Item.propTypes = {
-  /**
-   * Allow to rate
-   */
-  allowRate: PropTypes.bool,
-  /**
-   * Icon to render
-   */
-  icon: PropTypes.string,
   /**
    * OnClick func to rate
    */
   onClick: PropTypes.func,
   /**
-   * OnClick func to rate
+   * width of the icon
    */
-  onKeyPress: PropTypes.func
+  width: PropTypes.string,
+  /**
+   * height of the icon
+   */
+  height: PropTypes.string,
+  /**
+   * color of the icon
+   */
+  color: PropTypes.string,
+  /**
+   * color of the empty icon
+   */
+  emptyColor: PropTypes.string
 };
 
 Item.defaultProps = {
-  icon: '',
-  allowRate: false,
-  onClick: () => {},
-  onKeyPress: () => {}
+  width: '16',
+  height: '16',
+  color: '#ffc107',
+  emptyColor: '#eceff1',
+  onClick: () => {}
 };
 
 export default Item;
