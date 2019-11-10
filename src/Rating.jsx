@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import Item from './Item';
 
-const renderFunc = (fn, args) => {
-  return fn && typeof fn === 'function' ? fn(args) : null;
+const isFunc = fn => {
+  return fn && typeof fn === 'function';
 };
 
 const renderItemType = ({
@@ -14,6 +14,7 @@ const renderItemType = ({
   height,
   color,
   emptyColor,
+  allowRate,
   renderFullItem,
   renderEmptyItem,
   renderHalfItem,
@@ -26,28 +27,35 @@ const renderItemType = ({
   let colorEmpty = '';
 
   if (index <= valueFloor) {
+    if (isFunc(renderFullItem)) return renderFullItem({ index });
     colorValue = color;
     colorEmpty = color;
-    return renderFunc(renderFullItem, { index });
   }
   if (index > valueFloor) {
     colorValue = emptyColor;
     colorEmpty = emptyColor;
     if (index === valueCeil && !isInteger) {
+      if (isFunc(renderHalfItem)) return renderHalfItem({ index });
       colorValue = color;
-      return renderFunc(renderHalfItem, { index });
     }
-    return renderFunc(renderEmptyItem, { index });
+    if (isFunc(renderEmptyItem)) return renderEmptyItem({ index });
   }
+
+  const itemProps = allowRate
+    ? {
+        cursor: 'pointer',
+        onClick: () => onClick(index)
+      }
+    : {};
 
   return (
     <Item
+      {...itemProps}
       key={index}
       color={colorValue}
       emptyColor={colorEmpty}
       width={width}
       height={height}
-      onClick={() => onClick(index)}
     />
   );
 };
@@ -67,6 +75,10 @@ const Rating = props => {
 };
 
 Rating.propTypes = {
+  /**
+   * allow to rate
+   */
+  allowRate: PropTypes.bool,
   /**
    * Total of items to show
    */
@@ -108,7 +120,7 @@ Rating.propTypes = {
    */
   renderHalfItem: PropTypes.func,
   /**
-   * Function to handle rate on key press
+   * Function to handle rate on click
    */
   onClick: PropTypes.func,
   /**
@@ -122,6 +134,7 @@ Rating.propTypes = {
 };
 
 Rating.defaultProps = {
+  allowRate: false,
   starsLength: 5,
   value: 0,
   width: '16',

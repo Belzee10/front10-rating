@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Item = ({ onClick, width, height, color, emptyColor }) => {
+const Item = ({ onClick, width, height, color, emptyColor, cursor }) => {
   return (
-    <svg viewBox="0 0 24 24" width={width} height={height} onClick={onClick}>
+    <svg
+      cursor={cursor}
+      viewBox="0 0 24 24"
+      width={width}
+      height={height}
+      onClick={onClick}
+    >
       <path
         d="m23.79 9.87-5.36 5.49 1.26 7.77c.111.62-.562 1.074-1.1.78l-6.59-3.65v-20.23c.28 0 .56.13.68.4l3.31 7.05 7.37 1.12c.616.11.843.835.43 1.27z"
         fill={emptyColor}
@@ -36,7 +42,8 @@ Item.propTypes = {
   /**
    * color of the empty icon
    */
-  emptyColor: PropTypes.string
+  emptyColor: PropTypes.string,
+  cursor: PropTypes.oneOf(['pointer', 'default'])
 };
 
 Item.defaultProps = {
@@ -44,6 +51,7 @@ Item.defaultProps = {
   height: '16',
   color: '#ffc107',
   emptyColor: '#eceff1',
+  cursor: 'default',
   onClick: () => {}
 };
 
