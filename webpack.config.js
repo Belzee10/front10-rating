@@ -1,7 +1,8 @@
 const path = require('path');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
-  mode: 'production', // "production" | "development" | "none"
+  mode: 'production',
   entry: './src/Rating.jsx',
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -22,12 +23,12 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/i,
+        test: /\.css$/,
         use: ['style-loader', 'css-loader']
       }
     ]
   },
-
+  plugins: [new BundleAnalyzerPlugin({ openAnalyzer: false })],
   externals: {
     react: 'commonjs react'
   }

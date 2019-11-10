@@ -1,84 +1,88 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../assets/style.css';
 
 import Item from './Item';
+import './main.css';
 
-const renderItemType = (
-  allowRate,
+const isFunc = fn => {
+  return fn && typeof fn === 'function';
+};
+
+const renderItemType = ({
   index,
   value,
+  width,
+  height,
+  color,
+  emptyColor,
+  allowRate,
   renderFullItem,
   renderEmptyItem,
   renderHalfItem,
-  onKeyPress,
   onClick
-) => {
-  let icon = '';
-  const roundedValue = Math.ceil(value);
-  if (index <= roundedValue) {
-    if (index === roundedValue && value !== roundedValue) {
-      if (renderHalfItem && typeof renderHalfItem === 'function') return renderHalfItem(index);
-      icon += 'icon-star-half';
-    } else {
-      if (renderFullItem && typeof renderFullItem === 'function') return renderFullItem(index);
-      icon = 'icon-star-full';
-    }
-  } else {
-    if (renderEmptyItem && typeof renderEmptyItem === 'function') return renderEmptyItem(index);
-    icon = 'icon-star-empty';
+}) => {
+  const valueFloor = Math.floor(value);
+  const valueCeil = Math.ceil(value);
+  const isInteger = valueFloor === value;
+  let colorValue = '';
+  let colorEmpty = '';
+
+  if (index <= valueFloor) {
+    if (isFunc(renderFullItem)) return renderFullItem({ index });
+    colorValue = color;
+    colorEmpty = color;
   }
+  if (index > valueFloor) {
+    colorValue = emptyColor;
+    colorEmpty = emptyColor;
+    if (index === valueCeil && !isInteger) {
+      if (isFunc(renderHalfItem)) return renderHalfItem({ index });
+      colorValue = color;
+    }
+    if (isFunc(renderEmptyItem)) return renderEmptyItem({ index });
+  }
+
+  const itemProps = allowRate
+    ? {
+        cursor: 'pointer',
+        onClick: () => onClick(index)
+      }
+    : {};
+
   return (
     <Item
+      {...itemProps}
       key={index}
-      icon={icon}
-      allowRate={allowRate}
-      onClick={() => onClick(index)}
-      onKeyPress={() => onKeyPress(index)}
+      color={colorValue}
+      emptyColor={colorEmpty}
+      width={width}
+      height={height}
     />
   );
 };
 
-const Rating = ({
-  allowRate,
-  starsLength,
-  value,
-  renderItem,
-  renderFullItem,
-  renderEmptyItem,
-  renderHalfItem,
-  onKeyPress,
-  onClick,
-  className,
-  style
-}) => {
-  let items = [];
-  for (let index = 0; index < starsLength; index += 1) {
-    const itemToRender =
-      renderItem && typeof renderItem === 'function'
-        ? renderItem(index)
-        : renderItemType(
-            allowRate,
-            index + 1,
-            value,
-            renderFullItem,
-            renderEmptyItem,
-            renderHalfItem,
-            onKeyPress,
-            onClick
-          );
-    items = [...items, itemToRender];
-  }
+const Rating = props => {
+  const { starsLength, renderItem, value, showValue, className, style } = props;
+  const array = new Array(starsLength).fill();
   return (
-    <div className={`fr-rating-container ${className}`} style={style}>
-      {items}
+    <div className={`front10-rating-container ${className}`} style={style}>
+      {array.map((_, index) =>
+        isFunc(renderItem)
+          ? renderItem(index)
+          : renderItemType({ ...props, index: index + 1 })
+      )}
+      {showValue && <span className="front10-rating-value">{value}</span>}
     </div>
   );
 };
 
 Rating.propTypes = {
   /**
-   * Allow to rate
+   * define is show the value of the rating
+   */
+  showValue: PropTypes.bool,
+  /**
+   * allow to rate
    */
   allowRate: PropTypes.bool,
   /**
@@ -89,6 +93,22 @@ Rating.propTypes = {
    * Rating value
    */
   value: PropTypes.number,
+  /**
+   * width of the icon
+   */
+  width: PropTypes.string,
+  /**
+   * height of the icon
+   */
+  height: PropTypes.string,
+  /**
+   * color of the icon
+   */
+  color: PropTypes.string,
+  /**
+   * color of the empty icon
+   */
+  emptyColor: PropTypes.string,
   /**
    * Function to render the Items
    */
@@ -108,10 +128,6 @@ Rating.propTypes = {
   /**
    * Function to handle rate on click
    */
-  onKeyPress: PropTypes.func,
-  /**
-   * Function to handle rate on key press
-   */
   onClick: PropTypes.func,
   /**
    * className applied to the component
@@ -124,14 +140,18 @@ Rating.propTypes = {
 };
 
 Rating.defaultProps = {
+  showValue: false,
   allowRate: false,
   starsLength: 5,
   value: 0,
+  width: '16',
+  height: '16',
+  color: '#ffc107',
+  emptyColor: '#eceff1',
   renderItem: null,
   renderFullItem: null,
   renderEmptyItem: null,
   renderHalfItem: null,
-  onKeyPress: () => {},
   onClick: () => {},
   className: '',
   style: null

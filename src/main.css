@@ -1,0 +1,6 @@
+.front10-rating-container {
+  display: flex;
+}
+.front10-rating-container .front10-rating-value {
+  margin-left: 5px;
+}

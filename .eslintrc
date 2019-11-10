@@ -19,7 +19,11 @@
   "rules": {
     "prettier/prettier": ["error"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/destructuring-assignment": [1, "always", { "ignoreClassFields": true }],
+    "react/destructuring-assignment": [
+      1,
+      "always",
+      { "ignoreClassFields": true }
+    ],
     "max-lines": [1, { "max": 125, "skipComments": true }]
   }
 }
