@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Item from './Item';
+import './main.css';
 
 const isFunc = fn => {
   return fn && typeof fn === 'function';
@@ -61,20 +62,25 @@ const renderItemType = ({
 };
 
 const Rating = props => {
-  const { starsLength, renderItem, className, style } = props;
+  const { starsLength, renderItem, value, showValue, className, style } = props;
   const array = new Array(starsLength).fill();
   return (
-    <div className={className} style={style}>
+    <div className={`front10-rating-container ${className}`} style={style}>
       {array.map((_, index) =>
-        renderItem && typeof renderItem === 'function'
+        isFunc(renderItem)
           ? renderItem(index)
           : renderItemType({ ...props, index: index + 1 })
       )}
+      {showValue && <span className="front10-rating-value">{value}</span>}
     </div>
   );
 };
 
 Rating.propTypes = {
+  /**
+   * define is show the value of the rating
+   */
+  showValue: PropTypes.bool,
   /**
    * allow to rate
    */
@@ -134,6 +140,7 @@ Rating.propTypes = {
 };
 
 Rating.defaultProps = {
+  showValue: false,
   allowRate: false,
   starsLength: 5,
   value: 0,

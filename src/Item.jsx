@@ -24,9 +24,17 @@ const Item = ({ onClick, width, height, color, emptyColor, cursor }) => {
 
 Item.propTypes = {
   /**
-   * OnClick func to rate
+   * onClick func to rate
    */
   onClick: PropTypes.func,
+  /**
+   * handle mouse enter
+   */
+  onMouseEnter: PropTypes.func,
+  /**
+   * handle mouse leave
+   */
+  onMouseLeave: PropTypes.func,
   /**
    * width of the icon
    */
@@ -43,6 +51,9 @@ Item.propTypes = {
    * color of the empty icon
    */
   emptyColor: PropTypes.string,
+  /**
+   * cursor type
+   */
   cursor: PropTypes.oneOf(['pointer', 'default'])
 };
 
