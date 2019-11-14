@@ -4,6 +4,12 @@
   "description": "React rating component",
   "main": "build/index.js",
   "license": "MIT",
+  "keywords": [
+    "React Rating Component",
+    "Rating",
+    "Component",
+    "Light"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/Belzee10/front10-rating.git"
